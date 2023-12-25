@@ -1,0 +1,22 @@
+{
+  "name": "deno-boilerplate",
+  "version": "0.0.1",
+  "description": "A basic starting point for Deno projects.",
+  "main": "index.js",
+  "scripts": {
+    "start": "deno task start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/sstackus/deno-boilerplate.git"
+  },
+  "author": "Simon Stackus <simon@stackus.dev>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/sstackus/deno-boilerplate/issues"
+  },
+  "homepage": "https://github.com/sstackus/deno-boilerplate#readme",
+  "devDependencies": {
+    "@types/node": "^20.10.5"
+  }
+}

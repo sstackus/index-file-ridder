@@ -1,0 +1,19 @@
+{
+  "lint": {
+    "include": ["src/"]
+  },
+  "lock": false,
+  "nodeModulesDir": true,
+  "tasks": {
+    "start": "deno run --allow-read src/main.ts"
+  },
+  "fmt": {
+    "useTabs": false,
+    "lineWidth": 80,
+    "indentWidth": 2,
+    "semiColons": true,
+    "singleQuote": true,
+    "proseWrap": "preserve",
+    "include": ["src/"]
+  }
+}
