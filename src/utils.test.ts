@@ -5,10 +5,12 @@ const relativePaths = {
   before: unindent(`import a from '../a';
     import b from '../../../b.ts';
     import c from './c';
+    import f from 'ff/ff/ff';
     console.log(require('../../d/../e'));`),
   expected: unindent(`import a from './a';
     import b from '../../b.ts';
     import c from './c';
+    import f from 'ff/ff/ff';
     console.log(require('../d/../e'));`),
 };
 

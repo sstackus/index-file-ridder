@@ -28,8 +28,8 @@ export async function rewriteFile(path: string) {
 
 export function replaceRelativeImports(fileContents: string) {
   return fileContents
-    .replace(new RegExp('([\'"`])../([^(..)])', 'g'), '$1./$2')
-    .replace(new RegExp('([\'"`])../', 'g'), '$1');
+    .replace(/(['"`])\.{2}\/([^(\.{2})])/g, '$1./$2')
+    .replace(/(['"`])\.{2}\//g, '$1');
 }
 
 export async function removeDir(path: string) {
