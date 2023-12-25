@@ -1,7 +1,7 @@
 {
-  "name": "deno-boilerplate",
+  "name": "index-ridder",
   "version": "0.0.1",
-  "description": "A basic starting point for Deno projects.",
+  "description": "Get rid of pointless index files",
   "main": "./index.ts",
   "scripts": {
     "start": "deno task start",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/sstackus/deno-boilerplate.git"
+    "url": "git+ssh://git@github.com/sstackus/index-ridder.git"
   },
   "author": "Simon Stackus <simon@stackus.dev>",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/sstackus/deno-boilerplate/issues"
+    "url": "https://github.com/sstackus/index-ridder/issues"
   },
-  "homepage": "https://github.com/sstackus/deno-boilerplate#readme",
+  "homepage": "https://github.com/sstackus/index-ridder#readme",
   "devDependencies": {
     "@types/node": "^20.10.5",
     "glob": "^10.3.10"
