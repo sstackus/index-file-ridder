@@ -1,6 +1,12 @@
-import { readdir, rename, rmdir } from 'node:fs/promises';
-import { dirname, extname, sep } from 'node:path';
+import {
+  dirname,
+  extname,
+  sep,
+} from 'https://deno.land/std@0.177.0/path/mod.ts';
+import { exists, expandGlob } from 'https://deno.land/std@0.84.0/fs/mod.ts';
 import { out } from './out.ts';
+
+const DEFAULT_EXTENSIONS = 'ts,tsx,js,jsx,mjs,cjs';
 
 export function logError(
   path: string,
@@ -12,30 +18,59 @@ export function logError(
   out.error(`  ${error.message}`);
 }
 
-export async function moveFileUp(path: string) {
+export async function rewriteFile(path: string) {
   const destination = `${dirname(path)}${extname(path)}`;
-  await rename(path, destination);
+  const fileContents = await Deno.readTextFile(path);
+  const newFileContents = replaceRelativeImports(fileContents);
+  await Deno.writeTextFile(destination, newFileContents);
+  await Deno.remove(path);
 }
 
-export async function rewriteRelativeImports(path: string) {
-  const destination = `${dirname(path)}${extname(path)}`;
-  await rename(path, destination);
+export function replaceRelativeImports(fileContents: string) {
+  return fileContents
+    .replace(new RegExp('([\'"`])../([^(..)])', 'g'), '$1./$2')
+    .replace(new RegExp('([\'"`])../', 'g'), '$1');
 }
 
 export async function removeDir(path: string) {
-  await rmdir(dirname(path));
+  await Deno.remove(dirname(path), { recursive: false });
 }
 
-export function verifyIsEligibleDir(path: string) {
+export function isEligibleDir(path: string) {
   const segments = path.split(sep);
-  if (segments.length < 3) {
-    throw new Error('Path segment length');
-  }
+  return segments.length > 2;
 }
 
-export async function verifyIsLoneFile(path: string) {
-  const files = await readdir(dirname(path));
-  if (files.length !== 1) {
-    throw new Error('Other files present in directory');
+export async function isLoneFile(path: string) {
+  const files = await Deno.readDir(dirname(path));
+  const { length } = await Array.fromAsync(files);
+
+  return length === 1;
+}
+
+export async function getPaths() {
+  const ext = DEFAULT_EXTENSIONS;
+  const basePath = Deno.args[0];
+
+  if (!basePath) {
+    throw new Error('Expected a path as CLI argument');
+  }
+
+  if (!await exists(basePath)) {
+    throw new Error(
+      `The path "${basePath}" does not exist or is not accessible`,
+    );
+  }
+
+  const glob = `${basePath}/**/index.{${ext}}`;
+
+  return expandGlob(glob);
+}
+
+export function ensureExtensions(str: string) {
+  if (!/^[a-z\.]+(,[a-z\.]+)*$/i.test(str)) {
+    throw new TypeError(
+      'Extensions should be a comma-separated list, e.g.: ts,tsx,spec.js',
+    );
   }
 }

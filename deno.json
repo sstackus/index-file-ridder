@@ -1,11 +1,13 @@
 {
-  "lint": {
-    "include": ["src/"]
-  },
   "lock": false,
   "nodeModulesDir": true,
   "tasks": {
-    "start": "deno run --allow-read index.ts"
+    "start": "deno run --allow-read --allow-write index.ts",
+    "watch": "deno run --allow-read --allow-write --watch index.ts"
+  },
+  "lint": {
+    "include": ["src/"],
+    "exclude": ["src/testdata/"]
   },
   "fmt": {
     "useTabs": false,
@@ -14,6 +16,11 @@
     "semiColons": true,
     "singleQuote": true,
     "proseWrap": "preserve",
-    "include": ["src/"]
+    "include": ["src/"],
+    "exclude": ["src/testdata/"]
+  },
+  "test": {
+    "include": ["src/"],
+    "exclude": ["src/testdata/"]
   }
 }

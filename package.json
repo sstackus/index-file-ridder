@@ -4,7 +4,8 @@
   "description": "A basic starting point for Deno projects.",
   "main": "./index.ts",
   "scripts": {
-    "start": "deno task start"
+    "start": "deno task start",
+    "test": "deno test"
   },
   "repository": {
     "type": "git",
