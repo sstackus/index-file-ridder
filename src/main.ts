@@ -48,7 +48,7 @@ export default async function main() {
   console.timeEnd(TIME_LOG_KEY);
   out.log(`Total files found: ${pathsCount}`);
   out.log(`Skipped files: ${skippedPaths.size}`);
-  out.success(`Total files moved: ${successPaths.size}`);
+  out.success(`Total files affected: ${successPaths.size}`);
   if (errors.size > 0) {
     out.error(`Encountered errors: ${errors.size}`);
   }
