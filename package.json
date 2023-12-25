@@ -2,7 +2,7 @@
   "name": "deno-boilerplate",
   "version": "0.0.1",
   "description": "A basic starting point for Deno projects.",
-  "main": "index.js",
+  "main": "./index.ts",
   "scripts": {
     "start": "deno task start"
   },
