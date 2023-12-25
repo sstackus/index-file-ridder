@@ -37,7 +37,11 @@ export default async function main() {
     } catch (error) {
       logError(path, error, errors);
     }
-    break; // TODO Debug remove
+
+    if (DEBUG) {
+      // Test on a single result only
+      break;
+    }
   }
 
   out.log('—'.repeat(40));
