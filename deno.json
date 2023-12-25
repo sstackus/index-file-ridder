@@ -5,7 +5,7 @@
   "lock": false,
   "nodeModulesDir": true,
   "tasks": {
-    "start": "deno run --allow-read src/main.ts"
+    "start": "deno run --allow-read index.ts"
   },
   "fmt": {
     "useTabs": false,
